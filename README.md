@@ -36,3 +36,9 @@ So I focused on this architecture to optimize the parameters: the number of kern
 
 The weight and biases project for this second search can be found [here](https://wandb.ai/oriane-cavrois/brain_image_large_archi_optimization_4).
 
+**Results:**
+
+<img width="416" alt="Screenshot 2024-02-10 at 11 58 12 AM" src="https://github.com/OrianeCav/Brain-tumor-image-classification/assets/98775053/27c0c0d3-0360-450c-9853-c22f9e28bb04">
+
+
+The optimized "wide" architecture CNN has a f1 score of 81.4%. It has a particularly good recall score, that means that the number of brain with a tumor wrongly classified is very low. 
