@@ -31,7 +31,7 @@ def create_train_data_loader():
     return train_loader
 
 
-def train(model, data_loader, loss_fn, optimizer, n_epochs=1, verbose=True):
+def train(device, model, data_loader, loss_fn, optimizer, n_epochs=1, verbose=True):
     model = model.to(device)
     model.train(True)
     loss_train = np.zeros(n_epochs)
@@ -66,7 +66,7 @@ def train(model, data_loader, loss_fn, optimizer, n_epochs=1, verbose=True):
     return loss_train, acc_train
 
 
-def load_and_tune_eff_net():
+def load_and_tune_eff_net(device):
     model_eff_net7 = models.efficientnet_b7(weights="DEFAULT")
     model_eff_net7 = model_eff_net7.to(device)
 
@@ -81,7 +81,7 @@ def load_and_tune_eff_net():
     return model_eff_net7
 
 
-if __name__ == "__main__":
+def main():
     device = "cpu"
     if torch.cuda.is_available():
         print("using gpu")
@@ -90,7 +90,7 @@ if __name__ == "__main__":
         print("using mps")
         device = torch.device("mps")
 
-    model_eff_net7 = load_and_tune_eff_net()
+    model_eff_net7 = load_and_tune_eff_net(device)
 
     loss_fn = nn.NLLLoss()
     learning_rate = 1e-3
@@ -98,7 +98,11 @@ if __name__ == "__main__":
     train_loader = create_train_data_loader()
 
     loss_train, acc_train = train(
-        model_eff_net7, train_loader, loss_fn, optimizer_cl, n_epochs=30
+        device, model_eff_net7, train_loader, loss_fn, optimizer_cl, n_epochs=30
     )
 
     joblib.dump(model_eff_net7, "trained_model_efficient_net7.joblib")
+
+
+if __name__ == "__main__":
+    main()

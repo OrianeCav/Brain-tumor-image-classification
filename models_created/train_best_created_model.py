@@ -33,7 +33,7 @@ def create_train_data_loader(batch_size):
     return train_loader
 
 
-def train(model, data_loader, loss_fn, optimizer, n_epochs=1, verbose=True):
+def train(device, model, data_loader, loss_fn, optimizer, n_epochs=1, verbose=True):
     model = model.to(device)
     model.train(True)
     loss_train = np.zeros(n_epochs)
@@ -68,7 +68,7 @@ def train(model, data_loader, loss_fn, optimizer, n_epochs=1, verbose=True):
     return loss_train, acc_train
 
 
-if __name__ == "__main__":
+def main():
     device = "cpu"
     if torch.cuda.is_available():
         print("using gpu")
@@ -98,7 +98,11 @@ if __name__ == "__main__":
     train_loader = create_train_data_loader(batch_size)
 
     loss_train, acc_train = train(
-        conv_class, train_loader, loss_fn, optimizer_cl, n_epochs=num_epochs
+        device, conv_class, train_loader, loss_fn, optimizer_cl, n_epochs=num_epochs
     )
 
     joblib.dump(conv_class, "trained_best_created_model.joblib")
+
+
+if __name__ == "__main__":
+    main()

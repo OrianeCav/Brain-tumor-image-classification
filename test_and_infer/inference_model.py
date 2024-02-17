@@ -17,7 +17,7 @@ from tqdm import tqdm_notebook
 from sklearn.model_selection import KFold
 import itertools
 
-from test_model import PredictTestSet
+from test_and_infer.test_model import PredictTestSet
 from data_preprocessing.data_preprocessing import PreprocessData
 
 
