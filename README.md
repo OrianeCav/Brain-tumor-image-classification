@@ -42,3 +42,8 @@ The weight and biases project report for this second search can be found [here](
 
 
 The optimized "wide" architecture CNN has a f1 score of 81.4%. It has a particularly good recall score, that means that the number of brain with a tumor wrongly classified is very low. 
+
+## Run the training and test of the models
+There is a training/test pipeline created for the best existing and created models. In order to run them, you can run in the terminal: 
+```./train_test_created_model.sh``` for the created model and ```./train_test_efficient_net.sh``` for the efficient net b7 which was the best existing model. Before being able to run these files, you might need to run ```chmod +x train_test_created_model.sh``` or ```chmod +x train_test_efficient_net.sh``` before.
+These scripts will create the virtual environment with the required packages in case it does not exists, and then use the script train_test_model.py to train the model, compute the accuracy, precision, recall and f1-score on the test set, and print 4 images, their true label and their predictions. 
