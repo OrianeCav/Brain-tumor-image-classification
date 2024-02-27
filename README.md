@@ -8,8 +8,14 @@ After renaming the images and randomly split them between training and testing, 
 ## Modeling process
 
 ### Existing models
-I tuned 11 existing convolutional neural networks, I focused on 3 famous architectures: EfficientNet, ResNet and VGG, and trained different version of each to compare the different architecture as well as difference in complexity for each architecture. 
-I adapted the layers size to our problem caracteristics (mainly, a binary classification). 
+I fine-tuned 11 existing convolutional neural networks, focusing on three well-known architectures: EfficientNet, ResNet, and VGG. I trained different versions of each to compare their performance and complexity variations across architectures.
+
+The existing models differ in architecture and complexity, leading to variations in performance depending on dataset characteristics.
+- Among the three architectures tested, VGG is the shallowest, ranging from 11 to 19 layers. It utilizes small convolutional filters but has a large number of parameters (533MB for VGG16) due to a high number of fully connected layers. VGG is well-suited for fine-grained classification tasks.
+- ResNet, with a range of 18 to 152 layers and fewer parameters than VGG (25M for ResNet50), owes its performance to residual blocks. These blocks connect the activation of one layer to a further layer by skipping some in between. Initially designed to address vanishing gradient issues, they also allow skipping layers that may hinder overall performance. Residual blocks share characteristics with LSTM, including gating mechanisms. ResNet models are particularly effective at identifying small details due to their depth.
+- EfficientNet was developed with a focus on efficiency and resource optimization while maintaining high accuracy. It achieves this by optimizing a compound coefficient, which determines how much the network scales in width, depth, and resolution. While resource consumption may not be a concern for this project given the dataset's small size, EfficientNet's ability to scale efficiently is undoubtedly advantageous. With a parameter count ranging from 5.3M to 66M, it is smaller or comparable to ResNet.
+
+I adjusted the layer sizes to align with the characteristics of our problem, primarily focusing on binary classification.
 
 
 **Results:**
@@ -17,7 +23,8 @@ I adapted the layers size to our problem caracteristics (mainly, a binary classi
 <img width="406" alt="Screenshot 2024-02-10 at 9 57 56 AM" src="https://github.com/OrianeCav/Brain-tumor-image-classification/assets/98775053/f573a091-84ba-4fa9-994f-1929350a169f">
 
 
-Looking at f1-score, the model with the highest performance is the EfficientNet b7, with an f1-score of 85.9%. 
+Looking at f1-score, the model with the highest performance is the EfficientNet b7, with an f1-score of 85.9%.    
+The least performing models are the ResNet types, likely due to their depth, which makes them adept at identifying small details. However, in our case, a more holistic view of the MRI is probably preferable for tumor identification (especially considering that for most of the images, the tumors are at a fairly advanced stage with a big size). The VGG model performs adequately but is surpassed by the EfficientNet. The complexity of VGG may lead to overfitting, whereas the scalability of the EfficientNet makes it a strong candidate for this problem.
 
 ### Models created
 I started with a simple 1 convolutional layer to have an idea of the baseline accuracy that can be reached easily. Then, I tried a 2 convolutional layers model, and perform hyperparameter optimization (on the batch size, learning rate, number of epochs and number of kernels of the convolutional layers). I used random search with a 3-fold cross validation, as the data set size is fairly small, I wanted to avoid creating a validation set. 
