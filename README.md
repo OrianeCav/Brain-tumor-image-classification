@@ -38,7 +38,7 @@ I started by assessing the performance of 3 architectures and different hyper pa
 
 The weight and biases project report can be found [here](https://wandb.ai/oriane-cavrois/brain_image_architecture_optimization/reports/Architecture-optimization--Vmlldzo2ODM2Mzk0) and the whole project [here](https://wandb.ai/oriane-cavrois/brain_image_architecture_optimization_3?workspace=user-oriane-cavrois).
 
-The wide architecture clearly dominated in performance and provided the best results. 
+The wide architecture clearly dominated in performance and provided the best results. The explanation is probably that compared to the other models, it is not very deep but with mutiple hyperparameters due to the high number of kernels. That's probably what is well suited for this problem, similarly to why the VGG performs well.
 So I focused on this architecture to optimize the parameters: the number of kernel and kernel size of the convolutional layer, the kernel size of the maxpool layer and the dropout rate. I also optimized the number of epochs, batch size and learning rate.
 
 The weight and biases project report for this second search can be found [here](https://wandb.ai/oriane-cavrois/brain_image_large_archi_optimization_4?workspace=user-oriane-cavrois) and the whole project [here](https://wandb.ai/oriane-cavrois/brain_image_large_archi_optimization_4/reports/Parameter-optimization-of-the-wide-architecture--Vmlldzo2ODM2MjYz).
